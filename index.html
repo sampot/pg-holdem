@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a3d2e" />
+    <title>德州撲克</title>
+    <meta
+      name="description"
+      content="六人桌無限制德州對 AI；Sit & Go 盲注遞增、虛擬籌碼；純娛樂非博弈。"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🃏%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>德州撲克</h1>
+      <div class="top-actions">
+        <button id="btn-mute" type="button" class="ghost" aria-label="切換音效">音效開</button>
+        <button id="btn-about" type="button" class="ghost">關於</button>
+      </div>
+    </header>
+
+    <main id="view-lobby" class="view lobby" aria-label="大廳">
+      <p class="tagline">Texas Hold'em · 虛擬籌碼 · 純娛樂非博弈</p>
+      <div class="bank-card">
+        <span>銀行</span>
+        <b id="lobby-bank">5000</b>
+        <span class="sub">報名費 500 · 冠軍 +2500</span>
+      </div>
+      <div class="records" id="lobby-records">戰績載入中…</div>
+      <div class="lobby-actions">
+        <button id="btn-sng" type="button" class="primary">六人 Sit &amp; Go</button>
+        <button id="btn-hu" type="button" class="ctrl">單挑練習</button>
+        <button id="btn-topup" type="button" class="ghost">補籌碼至 5000</button>
+      </div>
+      <p id="lobby-flash" class="flash" role="status"></p>
+    </main>
+
+    <main id="view-table" class="view table hidden" aria-label="牌桌">
+      <div class="hud">
+        <span id="hud-blinds">盲注 10/20</span>
+        <span id="hud-hand">第 1 手</span>
+        <button id="btn-leave" type="button" class="ghost tiny">回大廳</button>
+      </div>
+
+      <div id="felt" class="felt">
+        <div id="seats" class="seats"></div>
+        <div class="center">
+          <div id="board" class="board" aria-label="公共牌"></div>
+          <div id="pot" class="pot">底池 0</div>
+        </div>
+      </div>
+
+      <p id="status" class="status" role="status"></p>
+
+      <section id="hero" class="hero" aria-label="你的手牌">
+        <div id="hero-cards" class="cards"></div>
+        <div id="hero-meta" class="hero-meta"></div>
+      </section>
+
+      <section id="action-bar" class="action-bar hidden" aria-label="行動">
+        <button id="btn-fold" type="button" class="ctrl danger">蓋牌</button>
+        <button id="btn-call" type="button" class="primary">跟注</button>
+        <button id="btn-raise" type="button" class="ctrl">加注</button>
+      </section>
+
+      <section id="raise-panel" class="raise-panel hidden" aria-label="加注">
+        <button type="button" class="ctrl" data-raise="half">½ 底池</button>
+        <button type="button" class="ctrl" data-raise="pot">底池</button>
+        <button type="button" class="ctrl" data-raise="allin">全下</button>
+        <button id="btn-raise-cancel" type="button" class="ghost">取消</button>
+      </section>
+
+      <section id="hand-over" class="hand-over hidden" aria-label="手牌結束">
+        <p id="hand-over-msg"></p>
+        <button id="btn-next-hand" type="button" class="primary">下一手</button>
+      </section>
+    </main>
+
+    <div id="match-over" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="match-title">
+      <div class="modal-card">
+        <h2 id="match-title">比賽結束</h2>
+        <p id="match-msg"></p>
+        <button id="btn-again" type="button" class="primary">再來一局</button>
+        <button id="btn-to-lobby" type="button" class="ctrl">回大廳</button>
+      </div>
+    </div>
+
+    <div id="about-panel" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="about-title">
+      <div class="modal-card">
+        <h2 id="about-title">關於</h2>
+        <p>無限制德州撲克（NLHE），六人 Sit &amp; Go 對 AI。虛擬籌碼，純娛樂非博弈。</p>
+        <p class="small">牌型：同花順 › 四條 › 葫蘆 › 同花 › 順子 › 三條 › 兩對 › 一對 › 高牌</p>
+        <p class="small">美術／音效：Kenney.nl CC0（見 ATTRIBUTION.md）</p>
+        <button id="btn-about-close" type="button" class="primary">關閉</button>
+      </div>
+    </div>
+
+    <div id="confirm-reset" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <h2>確認離開？</h2>
+        <p>進行中的 Sit &amp; Go 將放棄（報名費不退）。</p>
+        <button id="btn-leave-yes" type="button" class="danger">離開</button>
+        <button id="btn-leave-no" type="button" class="ctrl">繼續打</button>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
